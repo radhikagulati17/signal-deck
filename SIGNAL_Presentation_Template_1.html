@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SIGNAL Edition 001 — Presentation Template</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/black.min.css" id="theme" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:        #0A0E14;
+    --surface:   #12161F;
+    --surface-2: #171C27;
+    --line:      #262C38;
+    --ink:       #F4F6F9;
+    --muted:     #8892A3;
+    --cyan:      #6EE7F9;
+    --magenta:   #FF5C7A;
+    --amber:     #FFC65C;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); }
+
+  .reveal { font-family: var(--body); color: var(--ink); }
+  .reveal .slides { text-align: left; }
+  .reveal .slides section {
+    padding: 46px 66px;
+    width: 1280px !important;
+    height: 720px !important;
+    overflow: hidden;
+  }
+
+  .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+    font-family: var(--display);
+    text-transform: none;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    font-weight: 600;
+    margin: 0 0 6px 0;
+  }
+  .reveal h2 { font-size: 40px; }
+  .reveal h3 { font-size: 24px; }
+  .reveal p, .reveal li { font-size: 17px; }
+
+  /* ---------- Utility scaffolding ---------- */
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 14px;
+    display: block;
+  }
+  .eyebrow.magenta{ color: var(--magenta); }
+  .eyebrow.amber{ color: var(--amber); }
+
+  .title-xl {
+    font-size: 46px;
+    line-height: 1.08;
+    margin: 0 0 10px 0;
+  }
+  .sub {
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 620px;
+  }
+
+  .accent-rule {
+    width: 60px; height: 4px;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta));
+    border-radius: 2px;
+    margin: 10px 0 20px 0;
+  }
+
+  /* ---------- Cards ---------- */
+
+  .card-grid {
+    display: grid;
+    gap: 14px;
+    margin-top: 12px;
+    width: 100%;
+  }
+  .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 15px;
+    line-height: 1.45;
+    min-width: 0;
+    overflow-wrap: break-word;
+    transition: border-color .25s ease, transform .25s ease;
+  }
+  .card:hover { border-color: var(--cyan); transform: translateY(-2px); }
+  .card .card-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    display:block;
+    margin-bottom: 6px;
+  }
+  .card .card-value { font-family: var(--display); font-size: 20px; color: var(--ink); }
+  .card ul { margin: 0; padding-left: 1.1em; }
+  .card li { margin: 3px 0; font-size: 14px; }
+
+  /* ---------- Speaker slate ---------- */
+
+  .speaker-slate {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+  }
+  .speaker-tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--bg);
+    background: var(--cyan);
+    padding: 4px 11px;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .speaker-tag.magenta{ background: var(--magenta); }
+  .speaker-tag.amber{ background: var(--amber); }
+  .speaker-name { font-family: var(--display); font-size: 19px; color: var(--muted); }
+
+  .bullet-list { list-style: none; margin: 0; padding: 0; font-size: 19px; max-width: 980px; }
+  .bullet-list li {
+    position: relative;
+    padding-left: 26px;
+    margin: 10px 0;
+    line-height: 1.4;
+  }
+  .bullet-list li::before {
+    content: "";
+    position: absolute; left: 0; top: 7px;
+    width: 8px; height: 8px;
+    background: var(--cyan);
+    border-radius: 2px;
+    transform: rotate(45deg);
+  }
+
+  /* ---------- Section divider ---------- */
+
+  .divider {
+    display: flex; flex-direction: column; justify-content: center; height: 100%;
+  }
+  .divider .num {
+    font-family: var(--mono);
+    font-size: 100px;
+    color: var(--surface-2);
+    -webkit-text-stroke: 1.5px var(--line);
+    line-height: 0.8;
+  }
+  .divider h2 { font-size: 38px; margin-top: 10px; }
+
+  /* ---------- Expandable / progressive disclosure ---------- */
+
+  details.reveal-detail {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin-top: 10px;
+    font-size: 14px;
+    max-width: 980px;
+  }
+  details.reveal-detail summary {
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--cyan);
+    letter-spacing: 0.02em;
+    list-style: none;
+  }
+  details.reveal-detail summary::-webkit-details-marker { display: none; }
+  details.reveal-detail summary::before { content: "+ "; }
+  details.reveal-detail[open] summary::before { content: "– "; }
+  details.reveal-detail p { margin: 8px 0 0 0; color: var(--muted); line-height: 1.5; font-size: 14px; }
+
+  /* ---------- Network / dependency diagram (signature element) ---------- */
+
+  .constellation-wrap { display:flex; align-items:center; justify-content:center; height: 400px; }
+  .constellation { width: 100%; max-width: 860px; height: auto; }
+  .node-label { font-family: var(--mono); font-size: 13px; fill: var(--ink); }
+  .node-sub { font-family: var(--body); font-size: 10px; fill: var(--muted); }
+  .flow-line { stroke-dasharray: 6 6; animation: dash 2.4s linear infinite; }
+  @keyframes dash { to { stroke-dashoffset: -120; } }
+  .pulse-ring { animation: pulse 2.6s ease-out infinite; transform-origin: center; }
+  @keyframes pulse { 0% { r: 34; opacity: .55; } 100% { r: 60; opacity: 0; } }
+  .node-group { cursor: pointer; }
+  .node-detail {
+    font-size: 15px; color: var(--muted); font-family: var(--body);
+    max-width: 640px; margin: 6px auto 0 auto; text-align:center;
+    min-height: 44px;
+  }
+
+  /* ---------- Timeline ---------- */
+  .timeline { display:flex; gap: 0; margin-top: 26px; }
+  .timeline-step { flex: 1; text-align:center; position:relative; padding-top: 24px; font-size: 14px; }
+  .timeline-step::before {
+    content:""; position:absolute; top:8px; left:0; right:0; height:2px; background: var(--line);
+  }
+  .timeline-step::after {
+    content:""; position:absolute; top:2px; left:50%; transform:translateX(-50%);
+    width:14px; height:14px; border-radius:50%; background: var(--bg); border:2px solid var(--cyan);
+  }
+  .timeline-step:first-child::before{ left:50%; }
+  .timeline-step:last-child::before{ right:50%; }
+  .timeline-step .t-label { font-family: var(--mono); color: var(--muted); display:block; margin-bottom:6px; font-size:12px; }
+  .timeline-step .t-name { font-family: var(--display); font-size:18px; }
+
+  /* ---------- Scenario toggle ---------- */
+  .scenario-tabs { display:flex; gap:8px; margin-bottom: 14px; }
+  .scenario-tab {
+    font-family: var(--mono); font-size: 13px; padding: 7px 16px; border-radius: 100px;
+    border: 1px solid var(--line); color: var(--muted); cursor:pointer; background: transparent;
+    transition: all .2s ease;
+  }
+  .scenario-tab.active { color: var(--bg); background: var(--cyan); border-color: var(--cyan); }
+  .scenario-panel { display:none; }
+  .scenario-panel.active { display:block; }
+
+  /* ---------- Footer strip ---------- */
+  .slide-footer {
+    position: absolute; bottom: 20px; left: 66px; right: 66px;
+    display:flex; justify-content: space-between;
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+
+  .reveal .progress { color: var(--cyan); }
+  .reveal .controls { color: var(--muted); }
+</style>
+</head>
+
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- ============ TITLE ============ -->
+  <section data-background-color="#0A0E14">
+    <span class="eyebrow">SIGNAL · Edition 001</span>
+    <h1 class="title-xl">A 48-hour AI-native<br/>viability hackathon.</h1>
+    <div class="accent-rule"></div>
+    <p class="sub">Run in partnership with OneMundi and Warwick Business School. Real enterprise challenges, defended recommendations, and an AI audit log — assessed on viability, not polish.</p>
+    <div class="slide-footer"><span>OneMundi × WBS</span><span>Edition 001</span></div>
+  </section>
+
+  <!-- ============ SECTION 1 — WHY SIGNAL ============ -->
+  <section data-background-color="#0A0E14">
+    <section>
+      <div class="divider">
+        <span class="num">01</span>
+        <h2>Why SIGNAL?</h2>
+      </div>
+    </section>
+
+    <section>
+      <div class="speaker-slate">
+        <span class="speaker-tag">Speaker 1</span>
+        <span class="speaker-name">Opening — [Name]</span>
+      </div>
+      <ul class="bullet-list">
+        <li>Why we are here, and the problem this project addresses</li>
+        <li>Standard hackathons reward polished pitches and prototypes, not judgement</li>
+        <li>SIGNAL is deliberately built to differ from a standard hackathon in structure, not just branding</li>
+      </ul>
+      <details class="reveal-detail">
+        <summary>What SIGNAL changes, at a glance</summary>
+        <p>Final pitches become defended recommendations. Team rankings become independent viability assessment. No AI record becomes a required AI audit log. Slide decks are prohibited in favour of written reports. The full brief upfront becomes partially concealed until the event starts. 24 hours becomes 48, with a deliberate overnight rest before final judging.</p>
+      </details>
+    </section>
+
+    <section>
+      <div class="speaker-slate">
+        <span class="speaker-tag">Speaker 2</span>
+        <span class="speaker-name">What SIGNAL is — [Name]</span>
+      </div>
+      <div class="card-grid cols-2">
+        <div class="card">
+          <span class="card-label">FORMAT</span>
+          <ul>
+            <li>AI-native viability hackathon</li>
+            <li>Five viability lenses: viability, feasibility, ethics, commercial value, clarity</li>
+            <li>Real enterprise challenges, not generic case studies</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="card-label">ASSESSED ON</span>
+          <ul>
+            <li>Human judgement, AI-supported and logged</li>
+            <li>A defended written recommendation, not only a prototype</li>
+            <li>No rankings — each team assessed independently</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ SECTION 2 — THREE PILLARS ============ -->
+  <section data-background-color="#0A0E14">
+    <section>
+      <div class="divider">
+        <span class="num">02</span>
+        <h2>The Three Pillars</h2>
+      </div>
+    </section>
+
+    <!-- Signature interactive: dependency constellation -->
+    <section>
+      <span class="eyebrow">Interactive · click a node</span>
+      <h3>One direction of dependency</h3>
+      <div class="constellation-wrap">
+        <svg class="constellation" viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#6EE7F9" />
+            </marker>
+          </defs>
+
+          <line x1="200" y1="190" x2="440" y2="190" stroke="#6EE7F9" stroke-width="2" class="flow-line" marker-end="url(#arrow)" />
+          <line x1="620" y1="190" x2="700" y2="190" stroke="#6EE7F9" stroke-width="2" class="flow-line" marker-end="url(#arrow)" />
+
+          <g class="node-group" onclick="showNode('partners')">
+            <circle class="pulse-ring" cx="150" cy="190" r="34" fill="none" stroke="#FF5C7A" stroke-width="1.5"/>
+            <circle cx="150" cy="190" r="46" fill="#12161F" stroke="#FF5C7A" stroke-width="2"/>
+            <text x="150" y="185" text-anchor="middle" class="node-label">Industry</text>
+            <text x="150" y="202" text-anchor="middle" class="node-label">Partners</text>
+          </g>
+
+          <g class="node-group" onclick="showNode('team')">
+            <circle class="pulse-ring" cx="440" cy="190" r="34" fill="none" stroke="#6EE7F9" stroke-width="1.5" style="animation-delay:.8s"/>
+            <circle cx="440" cy="190" r="46" fill="#12161F" stroke="#6EE7F9" stroke-width="2"/>
+            <text x="440" y="185" text-anchor="middle" class="node-label">Team</text>
+            <text x="440" y="202" text-anchor="middle" class="node-label">Design</text>
+          </g>
+
+          <g class="node-group" onclick="showNode('event')" opacity="0.6">
+            <circle cx="770" cy="190" r="46" fill="#12161F" stroke="#FFC65C" stroke-width="2" stroke-dasharray="4 4"/>
+            <text x="770" y="185" text-anchor="middle" class="node-label">Event</text>
+            <text x="770" y="202" text-anchor="middle" class="node-label">Design</text>
+          </g>
+
+          <text x="150" y="260" text-anchor="middle" class="node-sub">sets budget + challenge count</text>
+          <text x="440" y="260" text-anchor="middle" class="node-sub">sets team + award structure</text>
+          <text x="770" y="260" text-anchor="middle" class="node-sub">next section →</text>
+        </svg>
+      </div>
+      <p id="node-detail" class="node-detail">Click Industry Partners or Team Design to see what flows downstream.</p>
+    </section>
+
+    <section>
+      <div class="speaker-slate">
+        <span class="speaker-tag magenta">Speaker 3</span>
+        <span class="speaker-name">Industry Partners — [Name]</span>
+      </div>
+      <ul class="bullet-list">
+        <li>Source of the real challenges teams work on — not sponsors trading logo placement</li>
+        <li>Warwick, WBS and alumni networks: fast to onboard, already understand SIGNAL's context</li>
+        <li>Challenge partners, mentors, judges and sponsors — potentially the same people</li>
+        <li>Sets the ceiling: budget and challenge count flow from here into everything else</li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="speaker-slate">
+        <span class="speaker-tag">Speaker 4</span>
+        <span class="speaker-name">Talent and Team Design — [Name]</span>
+      </div>
+      <div class="card-grid cols-2">
+        <div class="card">
+          <span class="card-label">TEAM FORMATION</span>
+          <ul>
+            <li>Multidisciplinary participants, team size set by challenge count and enrolment</li>
+            <li>One coordinator plus five viability-lens roles per team</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="card-label">FIVE-LENS ROLES</span>
+          <ul>
+            <li>AI Workflow · Research &amp; Evidence · Business Viability</li>
+            <li>Responsible AI &amp; Risk · Pitch &amp; Design</li>
+          </ul>
+        </div>
+      </div>
+      <p style="font-size:14px; color:var(--muted); margin-top:14px;">Bridges to Event Design as the third pillar →</p>
+    </section>
+  </section>
+
+  <!-- ============ SECTION 3 — THE SIGNAL EXPERIENCE ============ -->
+  <section data-background-color="#0A0E14">
+    <section>
+      <div class="divider">
+        <span class="num">03</span>
+        <h2>The SIGNAL Experience</h2>
+      </div>
+    </section>
+
+    <section>
+      <div class="speaker-slate">
+        <span class="speaker-tag amber">Speaker 5</span>
+        <span class="speaker-name">Event Design and Participant Experience — [Name]</span>
+      </div>
+      <div class="timeline">
+        <div class="timeline-step"><span class="t-label">FRI PM</span><span class="t-name">Arrive, brief,<br/>form teams</span></div>
+        <div class="timeline-step"><span class="t-label">SAT</span><span class="t-name">Research, mentor<br/>check-ins, sprint</span></div>
+        <div class="timeline-step"><span class="t-label">10PM SAT</span><span class="t-name">Protected rest,<br/>no mandatory work</span></div>
+        <div class="timeline-step"><span class="t-label">SUN</span><span class="t-name">Final pitches,<br/>judging, awards</span></div>
+      </div>
+      <details class="reveal-detail" style="margin-top:18px;">
+        <summary>Wellbeing, built in not bolted on</summary>
+        <p>Mentor check-ins are framed around wellbeing, not just deliverables: understand the problem, sanity-check direction, stress-test assumptions, then a communication-only pass before final pitches. A scheduled outdoor walk and a hard rule of no mandatory work or mentor sessions after the evening wind-down protect rest before judging.</p>
+      </details>
+    </section>
+
+    <section>
+      <span class="eyebrow amber">Interactive · scenario toggle</span>
+      <h3>Headcount is a dependent variable</h3>
+      <div class="scenario-tabs">
+        <button class="scenario-tab active" onclick="showScenario(this,'lean')">Lean</button>
+        <button class="scenario-tab" onclick="showScenario(this,'standard')">Standard</button>
+        <button class="scenario-tab" onclick="showScenario(this,'ambitious')">Ambitious</button>
+      </div>
+
+      <div class="scenario-panel active" id="scenario-lean">
+        <div class="card-grid cols-3">
+          <div class="card"><span class="card-label">TOTAL PEOPLE</span><span class="card-value">~95</span></div>
+          <div class="card"><span class="card-label">TEAMS</span><span class="card-value">12 of 5</span></div>
+          <div class="card"><span class="card-label">CHALLENGES</span><span class="card-value">4</span></div>
+          <div class="card"><span class="card-label">VENUE</span>WBS Coventry (Oculus) only</div>
+          <div class="card"><span class="card-label">PRIZE POOL</span><span class="card-value">~£2,375</span></div>
+          <div class="card"><span class="card-label">COST / HEAD</span><span class="card-value">~£185</span></div>
+        </div>
+      </div>
+      <div class="scenario-panel" id="scenario-standard">
+        <div class="card-grid cols-3">
+          <div class="card"><span class="card-label">TOTAL PEOPLE</span><span class="card-value">~150</span></div>
+          <div class="card"><span class="card-label">TEAMS</span><span class="card-value">20 of 5</span></div>
+          <div class="card"><span class="card-label">CHALLENGES</span><span class="card-value">5</span></div>
+          <div class="card"><span class="card-label">VENUE</span>WBS Coventry (Oculus) only</div>
+          <div class="card"><span class="card-label">PRIZE POOL</span><span class="card-value">~£6,750</span></div>
+          <div class="card"><span class="card-label">COST / HEAD</span><span class="card-value">~£275</span></div>
+        </div>
+      </div>
+      <div class="scenario-panel" id="scenario-ambitious">
+        <div class="card-grid cols-3">
+          <div class="card"><span class="card-label">TOTAL PEOPLE</span><span class="card-value">~245</span></div>
+          <div class="card"><span class="card-label">TEAMS</span><span class="card-value">30 of 5</span></div>
+          <div class="card"><span class="card-label">CHALLENGES</span><span class="card-value">6</span></div>
+          <div class="card"><span class="card-label">VENUE</span>WBS Coventry + The Shard finale</div>
+          <div class="card"><span class="card-label">PRIZE POOL</span><span class="card-value">~£14,700</span></div>
+          <div class="card"><span class="card-label">COST / HEAD</span><span class="card-value">~£430</span></div>
+        </div>
+      </div>
+      <p style="font-size:13px; color:var(--muted); margin-top:12px;">Figures from the current scaled-scenarios planning doc — confirm against Industry Partners' latest budget and challenge count before presenting.</p>
+    </section>
+  </section>
+
+  <!-- ============ SECTION 4 — WORKING AI-NATIVELY ============ -->
+  <section data-background-color="#0A0E14">
+    <section>
+      <div class="divider">
+        <span class="num">04</span>
+        <h2>Working AI-Natively</h2>
+      </div>
+    </section>
+
+    <section>
+      <div class="speaker-slate">
+        <span class="speaker-tag">Speaker 6</span>
+        <span class="speaker-name">Central Intelligence — [Name]</span>
+      </div>
+      <p style="font-size:17px; color:var(--muted); margin-bottom:0;">How we used AI throughout the project itself</p>
+      <div class="timeline">
+        <div class="timeline-step"><span class="t-label">01</span><span class="t-name">Context docs<br/>+ transcripts</span></div>
+        <div class="timeline-step"><span class="t-label">02</span><span class="t-name">Individual<br/>AI chats</span></div>
+        <div class="timeline-step"><span class="t-label">03</span><span class="t-name">Stream<br/>intelligence</span></div>
+        <div class="timeline-step"><span class="t-label">04</span><span class="t-name">Central<br/>Intelligence</span></div>
+      </div>
+      <details class="reveal-detail" style="margin-top:20px;">
+        <summary>Why this matters</summary>
+        <p>Every chat's output feeds a shared, evolving summary rather than sitting in isolation. A decision in one stream becomes a visible constraint for the next, instead of three separate plans reconciled at the end.</p>
+      </details>
+    </section>
+  </section>
+
+  <!-- ============ SECTION 5 — STRATEGIC VALUE ============ -->
+  <section data-background-color="#0A0E14">
+    <section>
+      <div class="divider">
+        <span class="num">05</span>
+        <h2>Strategic Value and Outlook</h2>
+      </div>
+    </section>
+
+    <section>
+      <div class="speaker-slate">
+        <span class="speaker-tag magenta">Speaker 7</span>
+        <span class="speaker-name">Value and Closing — [Name]</span>
+      </div>
+      <div class="card-grid cols-3">
+        <div class="card"><span class="card-label">ONEMUNDI</span>A flagship, differentiated hackathon format that scales across future editions</div>
+        <div class="card"><span class="card-label">WBS</span>A signature AI-native programme, run cross-university with Monash, Malaysia and Indonesia</div>
+        <div class="card"><span class="card-label">ENTERPRISE PARTNERS</span>Defensible recommendations on real challenges, plus early access to talent</div>
+      </div>
+      <p style="font-size:18px; margin-top:20px; color:var(--ink);">Edition 001 → a reusable ecosystem, not a one-off event.</p>
+      <details class="reveal-detail">
+        <summary>Open items to close out today</summary>
+        <p>Confirm challenge count and budget tier (Lean, Standard, Ambitious) with Richard. Decide the Friday-Saturday compression option against the deliberate overnight rest it removes. Sign off the enterprise partner judging conflict: mixed judging panel versus a separate Partner Prize track.</p>
+      </details>
+    </section>
+
+    <section data-background-color="#0A0E14">
+      <span class="eyebrow">SIGNAL · Edition 001</span>
+      <h2 class="title-xl" style="font-size:36px;">Questions.</h2>
+      <div class="accent-rule"></div>
+      <p class="sub">[Contact / next steps / appendix link]</p>
+    </section>
+  </section>
+
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    controls: true,
+    progress: true,
+    center: false,
+    transition: 'fade',
+    width: 1280,
+    height: 720,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 1.5
+  });
+
+  const nodeCopy = {
+    partners: "Industry Partners sets the ceiling: challenge count and budget confirmed here define the maximum scale for everything downstream.",
+    team:     "Team Design translates that ceiling into structure: number of teams, roles per team, and the award/judging shape.",
+    event:    "Event Design turns the resulting headcount into logistics: facilities, catering, travel, venue scenario."
+  };
+  function showNode(key){
+    document.getElementById('node-detail').textContent = nodeCopy[key];
+  }
+
+  function showScenario(btn, key){
+    document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.scenario-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('scenario-' + key).classList.add('active');
+  }
+</script>
+</body>
+</html>
